@@ -2,12 +2,15 @@
 import easyocr
 import asyncio
 import re
+import os
 from transformers import pipeline, AutoTokenizer, AutoModelForSeq2SeqLM
 
 asyncio.set_event_loop(asyncio.new_event_loop())
 
+model_path = os.path.join(os.path.dirname(__file__), "models/easyocr")
 # teksto atpazinimo is vaizdo modelio ikrovimas
-reader = easyocr.Reader(['lt'])
+reader = easyocr.Reader(['lt'], model_storage_directory=model_path)
+
 
 # vertimui reikalingi moduliai
 translator_model = "Helsinki-NLP/opus-mt-tc-big-lt-en"  # lt to en
